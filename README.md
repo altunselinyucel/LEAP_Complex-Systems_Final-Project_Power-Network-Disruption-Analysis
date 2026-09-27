@@ -4,28 +4,28 @@
 **Context:** Complex Systems Final Project – LEAP Program
 
 ## 1. Project Overview & Objective
-This project investigates whether incorporating a network's topological information improves the prediction of subsequent power substation interruptions[cite: 10]. The central objective is to evaluate if local connectivity features provide a measurable predictive advantage over standard baseline metrics when using a classical machine learning model[cite: 10].
+This project investigates whether incorporating a network's topological information improves the prediction of subsequent power substation interruptions. The central objective is to evaluate if local connectivity features provide a measurable predictive advantage over standard baseline metrics when using a classical machine learning model.
 
 ## 2. Dataset & Features
-* **Topology:** A synthetic grid-like network consisting of 144 substations (nodes) and 344 undirected physical links (edges)[cite: 5, 7].
-* **Baseline Features:** `load_ratio` (pre-disruption load relative to the nominal limit) and `equipment_age_years`[cite: 5, 7].
-* **Target Variable:** `interrupted_later` (a binary outcome indicating a simulated interruption over the following 24 hours)[cite: 5, 7].
+* **Topology:** A synthetic grid-like network consisting of 144 substations (nodes) and 344 undirected physical links (edges).
+* **Baseline Features:** `load_ratio` (pre-disruption load relative to the nominal limit) and `equipment_age_years`.
+* **Target Variable:** `interrupted_later` (a binary outcome indicating a simulated interruption over the following 24 hours).
 
 ## 3. Methodology & Workflow
-* **Network Construction:** An undirected graph was built using `NetworkX` representing the physical power grid connections[cite: 7].
+* **Network Construction:** An undirected graph was built using `NetworkX` representing the physical power grid connections.
 * **Feature Engineering:** Two structural network features were calculated to capture local topology:
-  * **Degree:** The number of direct physical links connected to a substation[cite: 10].
-  * **Local Clustering Coefficient:** The proportion of possible connections among a substation's direct neighbors[cite: 10].
-* **Modeling Pipeline:** A Logistic Regression classifier was utilized. Both the baseline model and the network-aware model were trained and evaluated using the exact same observations and a 30% stratified train/test split[cite: 7, 10]. Feature scaling was applied strictly within the training pipeline using `StandardScaler`[cite: 7].
+  * **Degree:** The number of direct physical links connected to a substation.
+  * **Local Clustering Coefficient:** The proportion of possible connections among a substation's direct neighbors.
+* **Modeling Pipeline:** A Logistic Regression classifier was utilized. Both the baseline model and the network-aware model were trained and evaluated using the exact same observations and a 30% stratified train/test split. Feature scaling was applied strictly within the training pipeline using `StandardScaler`.
 
 ## 4. Key Results & Evaluation
-Incorporating network features yielded strong performance improvements across all primary classification metrics[cite: 11].
+Incorporating network features yielded strong performance improvements across all primary classification metrics.
 
 | Metric | Baseline Features | Baseline + Network Features |
 | :--- | :--- | :--- |
-| **Accuracy** | 0.767[cite: 11] | 0.860[cite: 11] |
-| **F1 Score** | 0.444[cite: 11] | 0.750[cite: 11] |
-| **ROC AUC** | 0.828[cite: 11] | 0.949[cite: 11] |
+| **Accuracy** | 0.767 | 0.860 |
+| **F1 Score** | 0.444 | 0.750 |
+| **ROC AUC** | 0.828 | 0.949 |
 
 The comparative confusion matrices demonstrate that the network-aware model successfully altered the balance of false positives (false alarms) and false negatives (missed interruptions), providing a vastly more reliable predictive boundary for heavily imbalanced target classes.
 
